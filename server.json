@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.slobaloncar/livelaunch-mcp",
+  "title": "LiveLaunch",
+  "description": "Remote MCP for LiveLaunch, the Solana token launchpad. Unsigned-transaction tools for AI agents.",
+  "version": "1.0.0",
+  "websiteUrl": "https://livelaunch.vercel.app",
+  "repository": {
+    "url": "https://github.com/slobaloncar/livelaunch-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://livelaunch.vercel.app/mcp"
+    }
+  ]
+}
