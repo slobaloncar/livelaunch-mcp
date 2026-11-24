@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "livelaunch": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://livelaunch.vercel.app/mcp"
+      ]
+    }
+  }
+}

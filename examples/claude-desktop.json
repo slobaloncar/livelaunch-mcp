@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "livelaunch": {
+      "type": "http",
+      "url": "https://livelaunch.vercel.app/mcp"
+    }
+  }
+}
