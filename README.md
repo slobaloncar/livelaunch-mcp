@@ -70,6 +70,40 @@ npx mcp-remote https://livelaunch.vercel.app/mcp
 }
 ```
 
+### DeepSeek Harness
+
+LiveLaunch is a remote MCP server. In [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) there is no separate `mcp.json` for the official client: each server is one `@deepseek-ai/dsh-mcp-client` row in the profile patch.
+
+1. Install the official MCP client into your profile. Pin it to your `dsh` version — the npm `latest` tag can lag behind the harness:
+
+```bash
+dsh --version
+dsh plugin --profile web add @deepseek-ai/dsh-mcp-client@<your-dsh-version>
+```
+
+2. Add this to `~/.dsh/cordis.patch.yml` (or the project's `.dsh/cordis.patch.yml`). A copy lives at [`cordis.patch.yml`](./cordis.patch.yml):
+
+```yaml
+- insert:
+    - id: mcp-livelaunch
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: livelaunch
+        transport: streamable-http
+        url: https://livelaunch.vercel.app/mcp
+        failOnStartupError: false
+```
+
+3. Restart `dsh web` (or your profile). Tools appear as `mcp__livelaunch__*`. Confirm the row with `dsh --profile web --dump-config`. Swap `web` for your profile name if you use another one.
+
+This repository is also a config-only DSH bundle (`dsh.bundle` in `package.json`). After the official MCP client is installed in the profile, you can add the same row with:
+
+```bash
+dsh plugin --profile web add github:slobaloncar/livelaunch-mcp
+```
+
+There is no build script, so a GitHub install does not need a `prepare` allowlist. LiveLaunch never takes a private key; transaction tools return unsigned transactions only.
+
 ## Tools
 
 Nine tools, taken from a live `tools/list` on 24 November 2026 (Europe/Sarajevo, UTC+1). Read tools return data only. The `build_*` tools return an **unsigned** transaction; they do not broadcast.
@@ -121,6 +155,7 @@ Figures below are from live `GET https://livelaunch.vercel.app/api/v1/fees` on 2
 - npm [`livelaunch-sdk`](https://www.npmjs.com/package/livelaunch-sdk)
 - Solana Agent Kit v2: npm [`solana-agent-kit-plugin-livelaunch`](https://www.npmjs.com/package/solana-agent-kit-plugin-livelaunch)
 - ElizaOS: npm [`plugin-livelaunch`](https://www.npmjs.com/package/plugin-livelaunch) — source: [slobaloncar/plugin-livelaunch](https://github.com/slobaloncar/plugin-livelaunch)
+- DeepSeek Harness: config-only bundle in this repo (`cordis.patch.yml`). See [Use with DeepSeek Harness](#deepseek-harness).
 
 Official registry metadata for this remote server is in [`server.json`](./server.json) (`io.github.slobaloncar/livelaunch-mcp`). This repository does not publish the listing; publishing is a separate, approved step.
 

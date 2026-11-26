@@ -1,0 +1,27 @@
+{
+  "name": "livelaunch-mcp",
+  "version": "1.0.0",
+  "description": "Config-only DeepSeek Harness bundle that mounts the LiveLaunch remote MCP — a Solana token launchpad with unsigned-transaction tools for AI agents.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slobaloncar/livelaunch-mcp.git"
+  },
+  "homepage": "https://livelaunch.vercel.app/agents",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "mcp",
+    "solana",
+    "livelaunch"
+  ],
+  "files": [
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

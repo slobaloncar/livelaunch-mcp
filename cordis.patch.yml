@@ -1,0 +1,19 @@
+# Config-only DeepSeek Harness bundle: mounts the public LiveLaunch MCP
+# (https://livelaunch.vercel.app/mcp) through the official
+# @deepseek-ai/dsh-mcp-client. No custom plugin code.
+#
+# Install the official MCP client into the same profile first, pinned to your
+# dsh version (the npm "latest" tag may lag). Then either add this bundle
+# (`dsh plugin --profile web add github:slobaloncar/livelaunch-mcp`) or paste
+# this insert into ~/.dsh/cordis.patch.yml / .dsh/cordis.patch.yml and restart.
+#
+# Tools appear as mcp__livelaunch__*. LiveLaunch returns unsigned transactions
+# only; never send a private key to the server.
+- insert:
+    - id: mcp-livelaunch
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: livelaunch
+        transport: streamable-http
+        url: https://livelaunch.vercel.app/mcp
+        failOnStartupError: false
